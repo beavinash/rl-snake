@@ -125,33 +125,24 @@ class SnakeGameRL:
 
         if np.array_equal(action, [1, 0, 0]):
             new_dir = clock_wise[idx]
-        if np.array_equal()
+        elif np.array_equal(action, [0, 1, 0]): # r, d, l, u
+            next_idx = (idx + 1) % 4 # makes it circle
+            new_dir = clock_wise[next_idx]
+        else: # [0, 0, 1]
+            next_idx = (idx - 1) % 4
+            new_dir = clock_wise[next_idx]
+            
+        self.direction = new_dir
 
         x = self.head.x
         y = self.head.y
-        if direction == Direction.RIGHT:
+        if self.direction == Direction.RIGHT:
             x += BLOCK_SIZE
-        elif direction == Direction.LEFT:
+        elif self.direction == Direction.LEFT:
             x -= BLOCK_SIZE
-        elif direction == Direction.DOWN:
+        elif self.direction == Direction.DOWN:
             y += BLOCK_SIZE
-        elif direction == Direction.UP:
+        elif self.direction == Direction.UP:
             y -= BLOCK_SIZE
             
         self.head = Point(x, y)
-            
-
-if __name__ == '__main__':
-    game = SnakeGameRL()
-    
-    # game loop
-    while True:
-        game_over, score = game.play_step()
-        
-        if game_over == True:
-            break
-        
-    print('Final Score', score)
-        
-        
-    pygame.quit()
